@@ -1,0 +1,33 @@
+@(latinText: play.api.data.Form[models.LatinText])
+
+@main("Welcome to Play") {
+  <div class="row">
+    <div class="col-md-12">
+      @helper.form(action = routes.Application.save, args = 'method -> "post") {
+        <input type="hidden" name="id" value="@latinText("id").value" />
+        <div class="form-group">
+          <label for="title">Titre</label>
+          <input type="text" class="form-control" name="title" value="@latinText("title").value.getOrElse("")" />
+        </div>
+        <div class="form-group">
+          <label for="content">Texte</label>
+          <input type="hidden" name="content">
+          <div id="tempMyTextArea" class="form-control latin editable" contenteditable="true">@play.api.templates.Html(latinText("content").value.getOrElse("Ad quam fertur optimus quisque veramque illam honestatem expetens quam unam natura maxmie anquirit,..."))</div>
+        </div>
+        <div class="form-group">
+          <label for="comment">Commentaire</label>
+          <textarea name="comment" class="form-control"></textarea>
+        </div>
+       <button type="submit" class="btn btn-primary">Enregistrer</button>
+      }
+      <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="//rawgithub.com/timdown/rangy/master/currentrelease/rangy-core.js"></script>
+      <script type="text/javascript" src="//rawgithub.com/timdown/rangy/master/currentrelease/rangy-cssclassapplier.js"></script>
+
+      <script type="text/javascript" src="@routes.Assets.at("/javascripts/wysiwyg.js")"></script>
+      <script type="text/javascript">
+        wysiwyg("tempMyTextArea");
+      </script>
+    </div>
+  </div>
+}
