@@ -21,7 +21,7 @@ object Application extends Controller {
   }
 
   def show(id: Long) = Action {
-    Ok("ok")
+    Ok(views.html.show(LatinTextManager.load(id)))
   }
 
   def edit = Action {

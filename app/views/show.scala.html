@@ -1,0 +1,15 @@
+@(latinText: models.LatinText)
+
+@main(latinText.title) {
+  <div class="row">
+    <div class="col-md-12">
+      <h1>@latinText.title</h1>
+      <div class="latin">
+        @Html(latinText.content)
+      </div>
+    </div>
+    <div class="col-md-12">
+      @latinText.comment
+    </div>
+  </div>
+}
