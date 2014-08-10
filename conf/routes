@@ -4,8 +4,9 @@
 
 # Home page
 GET     /                           controllers.Application.index
-GET     /edit                       controllers.Application.edit
-POST    /edit                       controllers.Application.save
+GET     /create                     controllers.Application.create
+GET     /edit/:id                   controllers.Application.edit(id: Long)
+POST    /save                       controllers.Application.save
 GET     /show/:id                   controllers.Application.show(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path

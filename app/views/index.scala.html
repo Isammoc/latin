@@ -15,12 +15,15 @@
                 <tr>
                   <td>@lt.id</td>
                   <td>@lt.title</td>
-                  <td><a href="@routes.Application.show(lt.id.get)">Voir</a></td>
+                  <td>
+                    <a class="btn btn-primary" href="@routes.Application.show(lt.id.get)">Voir</a>
+                    <a class="btn btn-warning" href="@routes.Application.edit(lt.id.get)">Éditer</a>
+                  </td>
                 </tr>
               }
             </tbody>
           </table>
-          <a href="@routes.Application.edit">Créer un document</a>
+          <a href="@routes.Application.create">Créer un document</a>
         </div>
       </div>
 }

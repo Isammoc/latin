@@ -25,7 +25,7 @@ object LatinTextManager {
          | content = {content},
          | comment = {comment}
          | WHERE id = {id}
-         |""".stripMargin).on('title -> lt.title, 'content -> lt.content, 'comment -> lt.comment).executeUpdate()
+         |""".stripMargin).on('id -> id, 'title -> lt.title, 'content -> lt.content, 'comment -> lt.comment).executeUpdate()
       lt
     }
   }
