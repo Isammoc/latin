@@ -1,6 +1,5 @@
 (function($){
 	window.wysiwyg = function(tmpId) {
-
 		var types = {
 				"abl": "ablatif",
 				"acc": "accusatif",

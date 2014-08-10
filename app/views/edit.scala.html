@@ -3,16 +3,32 @@
 @main("Welcome to Play") {
   <div class="row">
     <div class="col-md-12">
+      @if(latinText.hasGlobalErrors) {
+        <div class="alert alert-danger">
+          <ul>
+            @for(error <- latinText.globalErrors) {
+              <li>@error.message</li>
+            }
+          </ul>
+        </div>
+      }
+
       @helper.form(action = routes.Application.save, args = 'method -> "post") {
         <input type="hidden" name="id" value="@latinText("id").value" />
-        <div class="form-group">
+        <div class="form-group @if(latinText("title").hasErrors) {has-error}">
           <label for="title">Titre</label>
           <input type="text" class="form-control" name="title" value="@latinText("title").value.getOrElse("")" />
+          @if(latinText("title").hasErrors) {
+            <span class="help-block">@latinText("title").errors.map(_.message).mkString(", ")</span>
+          }
         </div>
-        <div class="form-group">
+        <div class="form-group @if(latinText("content").hasErrors) {has-error}">
           <label for="content">Texte</label>
-          <input type="hidden" name="content">
+          <input type="hidden" name="content" id="content">
           <div id="tempMyTextArea" class="form-control latin editable" contenteditable="true">@play.api.templates.Html(latinText("content").value.getOrElse("Ad quam fertur optimus quisque veramque illam honestatem expetens quam unam natura maxmie anquirit,..."))</div>
+          @if(latinText("content").hasErrors) {
+            <span class="help-block">@latinText("content").errors.map(_.message).mkString(", ")</span>
+          }
         </div>
         <div class="form-group">
           <label for="comment">Commentaire</label>
@@ -27,6 +43,9 @@
       <script type="text/javascript" src="@routes.Assets.at("/javascripts/wysiwyg.js")"></script>
       <script type="text/javascript">
         wysiwyg("tempMyTextArea");
+        $('#tempMyTextArea').parents('form').on('submit', function(){
+            $('#content').val($('#tempMyTextArea').html());
+        });
       </script>
     </div>
   </div>
