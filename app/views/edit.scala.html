@@ -36,20 +36,20 @@
         </div>
        <button type="submit" class="btn btn-primary">Enregistrer</button>
       }
-      <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script type="text/javascript" src="//rawgithub.com/timdown/rangy/master/currentrelease/rangy-core.js"></script>
-      <script type="text/javascript" src="//rawgithub.com/timdown/rangy/master/currentrelease/rangy-cssclassapplier.js"></script>
-
-      <script type="text/javascript" src="@routes.Assets.at("/javascripts/wysiwyg.js")"></script>
-      <script type="text/javascript">
-        wysiwyg("tempMyTextArea");
-        $('#tempMyTextArea').parents('form').on('submit', function(){
-          $('#tempMyTextArea span')
-            .removeAttr('title')
-            .removeAttr('class');
-          $('#content').val($('#tempMyTextArea').html());
-        });
-      </script>
     </div>
   </div>
+} {
+  <script type="text/javascript" src="//rawgithub.com/timdown/rangy/master/currentrelease/rangy-core.js"></script>
+  <script type="text/javascript" src="//rawgithub.com/timdown/rangy/master/currentrelease/rangy-cssclassapplier.js"></script>
+
+  <script type="text/javascript" src="@routes.Assets.at("/javascripts/wysiwyg.js")"></script>
+  <script type="text/javascript">
+    wysiwyg("tempMyTextArea");
+    $('#tempMyTextArea').parents('form').on('submit', function(){
+      $('#tempMyTextArea span')
+        .removeAttr('title')
+        .removeAttr('class');
+      $('#content').val($('#tempMyTextArea').html());
+    });
+  </script>
 }

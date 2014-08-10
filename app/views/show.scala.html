@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1>@latinText.title</h1>
-      <div class="latin">
+      <div class="latin latin-display" id="content">
         @Html(latinText.content)
       </div>
     </div>
@@ -12,4 +12,61 @@
       @latinText.comment
     </div>
   </div>
+} {
+  <script>
+    var types = {
+        "abl": "ablatif",
+        "acc": "accusatif",
+        "indic": "verbe",
+        "inv": "invariant",
+        "gen": "genetif",
+        "gén": "genetif",
+        "nom": "nominatif"
+        };
+
+  $("#content span").filter(function() {
+    return $(this).data('type') != 'inv';
+  }).each(function(i, s) {
+    var subType = $(s).data("type").split(" ")[0];
+    var subClass = types[subType] ? types[subType] : "inconnu";
+    var content = $('<div></div>')
+      .addClass('content')
+      .addClass(subClass)
+      .html($(s).html());
+    
+    var comment = $('<div></div>')
+      .addClass('comment')
+      .text($(s).data("type"));
+
+    var block = $('<div></div>')
+      .addClass('latin-block')
+      .addClass('latin-hidden')
+      .append(content)
+      .append(comment);
+
+    $(s).replaceWith(block);
+  });
+
+  $("#content span").filter(function() {
+    return $(this).data('type') == 'inv';
+  }).each(function(i, s) {
+    var subType = $(s).data("type").split(" ")[0];
+    var subClass = types[subType] ? types[subType] : "inconnu";
+    var content = $('<div></div>')
+      .addClass('content')
+      .addClass(subClass)
+      .html($(s).html());
+
+    var block = $('<div></div>')
+      .addClass('latin-block')
+      .addClass('latin-hidden')
+      .append(content);
+
+    $(s).replaceWith(block);
+  });
+
+  $('#content').on('click', 'div.latin-hidden', function(){
+	  $(this).addClass('latin-display').removeClass('latin-hidden');
+	});
+  </script>
 }

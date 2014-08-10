@@ -56,3 +56,74 @@ div.latin.editable span.infinitif {
   color: red;
   border-bottom: 0.2em dotted red;
 }
+
+div.latin.latin-display {
+	font-size: 2em;
+}
+
+div.latin div.latin-block {
+	top: 2em;
+	display: inline-block;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+  vertical-align: top;
+  padding: 1px;
+}
+
+div.latin div.latin-block.latin-hidden:hover {
+	cursor: pointer;
+	border: 1px dotted gray;
+	padding: 0px;
+}
+
+div.latin div.latin-block div.content {
+  text-align: center;
+}
+
+div.latin div.latin-block div.comment {
+	padding-top: 0.5em;
+	font-size: 0.5em;
+	text-align: center;
+}
+
+div.latin div.latin-block.latin-hidden div.comment {
+	color: white;
+}
+
+div.latin.latin-display div.latin-block.latin-display div.invariant {
+  color: black;
+  border: 0.2em solid green;
+  margin: -0.2em;
+}
+div.latin.latin-display div.latin-block.latin-display div.nominatif {
+  color: black;
+  border-bottom: 0.2em solid black;
+  margin-bottom: -0.2em;
+}
+div.latin.latin-display div.latin-block.latin-display div.verbe {
+  color: red;
+  border: 0.2em solid red;
+  margin: -0.2em;
+}
+div.latin.latin-display div.latin-block.latin-display div.accusatif {
+  color: blue;
+  border-bottom: 0.2em solid blue;
+  margin-bottom: -0.2em;
+}
+div.latin.latin-display div.latin-block.latin-display div.ablatif,
+div.latin.latin-display div.latin-block.latin-display div.genetif,
+div.latin.latin-display div.latin-block.latin-display div.datif {
+  color: green;
+  border-bottom: 0.2em solid green;
+  margin-bottom: -0.2em;
+}
+div.latin.latin-display div.latin-block.latin-display div.infinitif {
+  color: red;
+  border-bottom: 0.2em dotted red;
+  margin: -0.2em;
+}
+div.latin.latin-display div.latin-block.latin-display div.inconnu {
+  color: purple;
+  border: 0.4em dotted purple;
+  margin: -0.4em;
+}
