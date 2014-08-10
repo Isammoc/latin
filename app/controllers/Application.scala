@@ -17,7 +17,8 @@ object Application extends Controller {
     )
 
   def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+    val latinTexts = LatinTextManager.fetchAll
+    Ok(views.html.index(latinTexts))
   }
 
   def show(id: Long) = Action {

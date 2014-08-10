@@ -37,4 +37,11 @@ object LatinTextManager {
       |   WHERE id = {id}
       |""".stripMargin).on('id -> id).executeQuery().as(parser.single)
   }
+
+  def fetchAll = DB.withConnection { implicit c =>
+    SQL("""
+      | SELECT id, title, content, comment
+      |   FROM latin_text
+      |""".stripMargin).executeQuery().as(parser.*)
+  }
 }

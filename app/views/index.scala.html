@@ -1,9 +1,25 @@
-@(message: String)
+@(latinTexts: Seq[models.LatinText])
 
-@main("Welcome to Play") {
+@main("Latin") {
        <div class="row">
         <div class="col-md-12">
           <h1>Analyse de texte</h1>
+          <table class="table table-striped">
+            <thead>
+              <th>Id</th>
+              <th>Titre</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              @for(lt <- latinTexts) {
+                <tr>
+                  <td>@lt.id</td>
+                  <td>@lt.title</td>
+                  <td><a href="@routes.Application.show(lt.id.get)">Voir</a></td>
+                </tr>
+              }
+            </tbody>
+          </table>
           <a href="@routes.Application.edit">Créer un document</a>
         </div>
       </div>
