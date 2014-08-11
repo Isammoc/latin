@@ -81,48 +81,49 @@ div.latin div.latin-block div.content {
 }
 
 div.latin div.latin-block div.comment {
-	padding-top: 0.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 	font-size: 0.5em;
 	text-align: center;
 }
 
-div.latin div.latin-block.latin-hidden div.comment {
+div.latin div.latin-block.latin-hidden>div.comment {
 	color: white;
 }
 
-div.latin.latin-display div.latin-block.latin-display div.invariant {
+div.latin.latin-display div.latin-block.latin-display>div.invariant {
   color: black;
   border: 0.2em solid green;
   margin: -0.2em;
 }
-div.latin.latin-display div.latin-block.latin-display div.nominatif {
+div.latin.latin-display div.latin-block.latin-display>div.nominatif {
   color: black;
   border-bottom: 0.2em solid black;
   margin-bottom: -0.2em;
 }
-div.latin.latin-display div.latin-block.latin-display div.verbe {
+div.latin.latin-display div.latin-block.latin-display>div.verbe {
   color: red;
   border: 0.2em solid red;
   margin: -0.2em;
 }
-div.latin.latin-display div.latin-block.latin-display div.accusatif {
+div.latin.latin-display div.latin-block.latin-display>div.accusatif {
   color: blue;
   border-bottom: 0.2em solid blue;
   margin-bottom: -0.2em;
 }
-div.latin.latin-display div.latin-block.latin-display div.ablatif,
-div.latin.latin-display div.latin-block.latin-display div.genetif,
-div.latin.latin-display div.latin-block.latin-display div.datif {
+div.latin.latin-display div.latin-block.latin-display>div.ablatif,
+div.latin.latin-display div.latin-block.latin-display>div.genetif,
+div.latin.latin-display div.latin-block.latin-display>div.datif {
   color: green;
   border-bottom: 0.2em solid green;
   margin-bottom: -0.2em;
 }
-div.latin.latin-display div.latin-block.latin-display div.infinitif {
+div.latin.latin-display div.latin-block.latin-display>div.infinitif {
   color: red;
   border-bottom: 0.2em dotted red;
-  margin: -0.2em;
+  margin-bottom: -0.2em;
 }
-div.latin.latin-display div.latin-block.latin-display div.inconnu {
+div.latin.latin-display div.latin-block.latin-display>div.inconnu {
   color: purple;
   border: 0.4em dotted purple;
   margin: -0.4em;

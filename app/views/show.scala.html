@@ -2,10 +2,27 @@
 
 @main(latinText.title) {
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-11 col-md-offset-1">
       <h1>@latinText.title</h1>
+      <p><br/></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1">
+      <div class="btn-group-vertical latin-btn-types">
+        <button class="btn btn-default" data-type="ablatif">Ablatif</button>
+        <button class="btn btn-default" data-type="accusatif">Accusatif</button>
+        <button class="btn btn-default" data-type="datif">Datif</button>
+        <button class="btn btn-default" data-type="genetif">Génétif</button>
+        <button class="btn btn-default" data-type="invariant">Invariant</button>
+        <button class="btn btn-default" data-type="nominatif">Nominatif</button>
+        <button class="btn btn-default" data-type="infinitif">Verbe à l'infinitif</button>
+        <button class="btn btn-default" data-type="verbe">Verbe conjugué</button>
+      </div>
+    </div>
+    <div class="col-md-11">
       <div class="latin latin-display" id="content">
-        @Html(latinText.content)
+        @play.twirl.api.Html(latinText.content)
       </div>
     </div>
     <div class="col-md-12">
@@ -30,7 +47,8 @@
   $("#content span").filter(function() {
     return $(this).data('type') != 'inv';
   }).each(function(i, s) {
-    var subType = $(s).data("type").split(" ")[0];
+	  var type = $(s).data("type")
+    var subType = type.split(" ")[0];
     var subClass = types[subType] ? types[subType] : "inconnu";
     var content = $('<div></div>')
       .addClass('content')
@@ -42,6 +60,7 @@
       .text($(s).data("type"));
 
     var block = $('<div></div>')
+      .data('type', type)
       .addClass('latin-block')
       .addClass('latin-hidden')
       .append(content)
@@ -53,14 +72,14 @@
   $("#content span").filter(function() {
     return $(this).data('type') == 'inv';
   }).each(function(i, s) {
-    var subType = $(s).data("type").split(" ")[0];
-    var subClass = types[subType] ? types[subType] : "inconnu";
+    var subClass = 'invariant';
     var content = $('<div></div>')
       .addClass('content')
       .addClass(subClass)
       .html($(s).html());
 
     var block = $('<div></div>')
+      .data('type', 'inv')
       .addClass('latin-block')
       .addClass('latin-hidden')
       .append(content);
@@ -71,5 +90,19 @@
   $('#content').on('click', 'div.latin-hidden', function(){
 	  $(this).addClass('latin-display').removeClass('latin-hidden');
 	});
+
+  $('div.latin-btn-types button').on('click', function() {
+    var realType = $(this).data('type');
+    var blocks = $('#content div.latin-block').filter(function(){
+        var subType = $(this).data("type").split(" ")[0];
+        return realType == (types[subType] ? types[subType] : "inconnu");
+    });
+    var hiddenBlocks = blocks.filter('.latin-hidden');
+    if(hiddenBlocks.length == 0) {
+        blocks.removeClass('latin-display').addClass('latin-hidden');
+    } else {
+        hiddenBlocks.addClass('latin-display').removeClass('latin-hidden');
+    }
+  });
   </script>
 }
