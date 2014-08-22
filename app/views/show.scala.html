@@ -87,9 +87,15 @@
     $(s).replaceWith(block);
   });
 
-  $('#content').on('click', 'div.latin-hidden', function(){
+  $('#content').on('click', 'div.latin-hidden', function(e) {
 	  $(this).addClass('latin-display').removeClass('latin-hidden');
+	  e.stopPropagation();
 	});
+
+  $('#content').on('click', 'div.latin-display', function(e) {
+    $(this).removeClass('latin-display').addClass('latin-hidden');
+    e.stopPropagation();
+  });
 
   $('div.latin-btn-types button').on('click', function() {
     var realType = $(this).data('type');
