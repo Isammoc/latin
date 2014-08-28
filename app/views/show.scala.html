@@ -56,7 +56,7 @@
     return $(this).data('type') != 'inv';
   }).each(function(i, s) {
 	  var type = $(s).data("type")
-    var subType = type.split(" ")[0];
+    var subType = type.split(" ")[0].toLowerCase();
     var subClass = types[subType] ? types[subType] : "inconnu";
     var content = $('<div></div>')
       .addClass('content')
@@ -108,7 +108,7 @@
   $('div.latin-btn-types button').on('click', function() {
     var realType = $(this).data('type');
     var blocks = $('#content div.latin-block').filter(function(){
-        var subType = $(this).data("type").split(" ")[0];
+        var subType = $(this).data("type").split(" ")[0].toLowerCase();
         return realType == (types[subType] ? types[subType] : "inconnu");
     });
     var hiddenBlocks = blocks.filter('.latin-hidden');

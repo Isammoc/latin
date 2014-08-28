@@ -45,7 +45,7 @@
 						var dataType = prompt("Type ? ", "inv");
 						if (dataType) {
 							var el = document.createElement("span");
-							var subType = dataType.split(" ")[0];
+							var subType = dataType.split(" ")[0].toLowerCase();
 							var subClass = types[subType] ? types[subType] : "inconnu";
 
 							el.classList.add(subClass);
@@ -64,7 +64,7 @@
 		});
 		$.each($display.children("span"), function(i, s) {
 			if($(s).data("type")) {
-				var subType = $(s).data("type").split(" ")[0];
+				var subType = $(s).data("type").split(" ")[0].toLowerCase();
 				var subClass = types[subType] ? types[subType] : "inconnu";
 				$(s)
 				  .attr("title", $(s).data("type"))
