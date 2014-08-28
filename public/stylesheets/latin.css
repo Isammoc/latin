@@ -44,7 +44,7 @@ div.latin.editable span.accusatif {
   border-bottom: 0.2em solid blue;
 }
 div.latin.editable span.ablatif,
-div.latin.editable span.genetif,
+div.latin.editable span.genitif,
 div.latin.editable span.datif {
   color: green;
   border-bottom: 0.2em solid green;
@@ -114,7 +114,7 @@ div.latin.latin-display div.latin-block.latin-display>div.accusatif {
   margin-bottom: -0.2em;
 }
 div.latin.latin-display div.latin-block.latin-display>div.ablatif,
-div.latin.latin-display div.latin-block.latin-display>div.genetif,
+div.latin.latin-display div.latin-block.latin-display>div.genitif,
 div.latin.latin-display div.latin-block.latin-display>div.datif {
   color: green;
   border-bottom: 0.2em solid green;
