@@ -35,6 +35,10 @@ div.latin.editable span.nominatif {
   color: black;
   border-bottom: 0.2em solid black;
 }
+div.latin.editable span.vocatif {
+	color: black;
+	border-bottom: 0.2em dotted black;
+}
 div.latin.editable span.verbe {
   color: red;
   border: 0.2em solid red;
@@ -101,6 +105,11 @@ div.latin.latin-display div.latin-block.latin-display>div.invariant {
 div.latin.latin-display div.latin-block.latin-display>div.nominatif {
   color: black;
   border-bottom: 0.2em solid black;
+  margin-bottom: -0.2em;
+}
+div.latin.latin-display div.latin-block.latin-display>div.vocatif {
+  color: black;
+  border-bottom: 0.2em dotted black;
   margin-bottom: -0.2em;
 }
 div.latin.latin-display div.latin-block.latin-display>div.verbe {

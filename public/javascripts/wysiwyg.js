@@ -1,17 +1,24 @@
 (function($){
 	window.wysiwyg = function(tmpId) {
 		var types = {
-				"abl": "ablatif",
-				"acc": "accusatif",
-				"dat": "datif",
-				"gen": "genitif",
-				"gén": "genitif",
-				"indic": "verbe",
-				"inf": "infinitif",
-				"inv": "invariant",
-				"nom": "nominatif",
-				"subj": "verbe"
-				};
+			"abl" : "ablatif",
+			"acc" : "accusatif",
+			"dat" : "datif",
+			"gen" : "genitif",
+			"gén" : "genitif",
+			"gérondif" : "verbe",
+			"gerondif" : "verbe",
+			"indic" : "verbe",
+			"impé" : "verbe",
+			"impe" : "verbe",
+			"inf" : "infinitif",
+			"inv" : "invariant",
+			"nom" : "nominatif",
+			"part" : "verbe",
+			"subj" : "verbe",
+			"supin" : "verbe",
+			"voc" : "vocatif"
+		};
 
 		rangy.init();
 		var $display = $('#' + tmpId);
