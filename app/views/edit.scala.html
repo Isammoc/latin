@@ -25,7 +25,7 @@
         <div class="form-group @if(latinText("content").hasErrors) {has-error}">
           <label for="content">Texte</label>
           <input type="hidden" name="content" id="content">
-          <div id="tempMyTextArea" class="form-control latin editable" contenteditable="true">@Html(latinText("content").value.getOrElse("Ad quam fertur optimus quisque veramque illam honestatem expetens quam unam natura maxmie anquirit,..."))</div>
+          <div id="tempMyTextArea" class="form-control latin editable" contenteditable="true">@play.twirl.api.Html(latinText("content").value.getOrElse("Ad quam fertur optimus quisque veramque illam honestatem expetens quam unam natura maxmie anquirit,..."))</div>
           @if(latinText("content").hasErrors) {
             <span class="help-block">@latinText("content").errors.map(_.message).mkString(", ")</span>
           }
