@@ -29,6 +29,7 @@ div.form-control {
 div.latin.editable span.invariant {
   color: black;
   border: 0.2em solid green;
+  border-radius: 0.5em;
 }
 div.latin.editable span.nominatif {
   color: black;
@@ -95,6 +96,7 @@ div.latin.latin-display div.latin-block.latin-display>div.invariant {
   color: black;
   border: 0.2em solid green;
   margin: -0.2em;
+  border-radius: 0.5em;
 }
 div.latin.latin-display div.latin-block.latin-display>div.nominatif {
   color: black;
