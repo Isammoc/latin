@@ -45,4 +45,8 @@ consectatur<span data-type="inv">que</span></span> <span data-type="acc f sg">nu
           val lt = LatinTextManager.save(latinText)
           Redirect(routes.Application.show(lt.id.get))})
   }
+
+  def help = Action {
+    Ok(views.html.help())
+  }
 }

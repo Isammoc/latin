@@ -26,30 +26,38 @@ div.form-control {
 }
 
 
-div.latin.editable span.invariant {
+div.latin.editable span.invariant,
+span.latin-help.invariant {
   color: black;
   border: 0.2em solid green;
   border-radius: 0.5em;
 }
-div.latin.editable span.nominatif {
+div.latin.editable span.nominatif,
+span.latin-help.nominatif {
   color: black;
   border-bottom: 0.2em solid black;
 }
-div.latin.editable span.vocatif {
+div.latin.editable span.vocatif,
+span.latin-help.vocatif {
 	color: black;
 	border-bottom: 0.2em dotted black;
 }
-div.latin.editable span.verbe {
+div.latin.editable span.verbe,
+span.latin-help.verbe {
   color: red;
   border: 0.2em solid red;
 }
-div.latin.editable span.accusatif {
+div.latin.editable span.accusatif,
+span.latin-help.accusatif {
   color: blue;
   border-bottom: 0.2em solid blue;
 }
 div.latin.editable span.ablatif,
 div.latin.editable span.genitif,
-div.latin.editable span.datif {
+div.latin.editable span.datif,
+span.latin-help.ablatif,
+span.latin-help.genitif,
+span.latin-help.datif {
   color: green;
   border-bottom: 0.2em solid green;
 }
@@ -57,7 +65,8 @@ div.latin.editable span.inconnu {
   color: purple;
   border: 0.4em dotted purple;
 }
-div.latin.editable span.infinitif {
+div.latin.editable span.infinitif,
+span.latin-help.infinitif {
   color: red;
   border-bottom: 0.2em dotted red;
 }
