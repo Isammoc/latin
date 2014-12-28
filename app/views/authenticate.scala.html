@@ -1,0 +1,37 @@
+@(auth: play.api.data.Form[String])
+
+@main("Latin") {
+       <div class="row">
+        <div class="col-md-12">
+          <h1>Authentification</h1>
+          <p>Vous avez besoin d'un mot de passe pour naviguer sur le site.</p>
+          @if(auth.hasGlobalErrors) {
+            <div class="alert alert-danger">
+              <ul>
+                @for(error <- auth.globalErrors) {
+                  <li>@error.message</li>
+                }
+              </ul>
+            </div>
+          }
+          @helper.form(action = routes.Secured.authenticate, 'method -> "post", 'class -> "form form-horizontal") {
+            <div class="form-group @if(auth("pass").hasErrors) {has-error}">
+              <label class="col-sm-2 control-label" for="pass">Mot de passe</label>
+              <div class="col-sm-4">
+                <input type="password" class="form-control" name="pass" value="" autofocus />
+              </div>
+              @if(auth("pass").hasErrors) {
+                <span class="help-block">@auth("pass").errors.map(_.message).mkString(", ")</span>
+              }
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-primary">Se connecter</button>
+              </div>
+            </div>
+           }
+        </div>
+      </div>
+} {
+
+}
