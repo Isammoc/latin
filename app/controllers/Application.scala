@@ -47,6 +47,11 @@ consectatur<span data-type="inv">que</span></span> <span data-type="acc f sg">nu
           Redirect(routes.Application.show(lt.id.get))})
   }
 
+  def delete(id: Long) = LoggingAction {
+    LatinTextManager.delete(id)
+    Redirect(routes.Application.index())
+  }
+
   def help = Action {
     Ok(views.html.help())
   }

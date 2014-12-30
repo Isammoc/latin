@@ -44,4 +44,9 @@ object LatinTextManager {
       |   FROM latin_text
       |""".stripMargin).executeQuery().as(parser.*)
   }
+
+  def delete(id: Long) = DB.withConnection {implicit c =>
+    SQL("""DELETE FROM latin_text WHERE id = {id}""").on('id -> id).execute()
+  }
+
 }

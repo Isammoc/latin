@@ -7,6 +7,7 @@ GET     /                           controllers.Application.index
 GET     /help                       controllers.Application.help
 GET     /create                     controllers.Application.create
 GET     /edit/:id                   controllers.Application.edit(id: Long)
+GET     /delete/:id                 controllers.Application.delete(id: Long)
 POST    /save                       controllers.Application.save
 GET     /show/:id                   controllers.Application.show(id: Long)
 POST    /login                      controllers.Secured.authenticate
