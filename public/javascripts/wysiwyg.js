@@ -13,6 +13,7 @@
 			"impe" : "verbe",
 			"inf" : "infinitif",
 			"inv" : "invariant",
+			"locatif" : "locatif",
 			"nom" : "nominatif",
 			"part" : "verbe",
 			"subj" : "verbe",

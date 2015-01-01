@@ -32,6 +32,11 @@ span.latin-help.invariant {
   border: 0.2em solid green;
   border-radius: 0.5em;
 }
+div.latin.editable span.locatif,
+span.latin-help.locatif {
+  color: black;
+  border-bottom: 0.2em dotted black;
+}
 div.latin.editable span.nominatif,
 span.latin-help.nominatif {
   color: black;
@@ -110,6 +115,11 @@ div.latin.latin-display div.latin-block.latin-display>div.invariant {
   border: 0.2em solid green;
   margin: -0.2em;
   border-radius: 0.5em;
+}
+div.latin.latin-display div.latin-block.latin-display>div.locatif {
+  color: black;
+  border-bottom: 0.2em dotted black;
+  margin-bottom: -0.2em;
 }
 div.latin.latin-display div.latin-block.latin-display>div.nominatif {
   color: black;
