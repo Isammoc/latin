@@ -13,7 +13,8 @@ object Application extends Controller {
       "id" -> optional(longNumber),
       "title" -> nonEmptyText,
       "content" -> nonEmptyText,
-      "comment" -> text
+      "comment" -> text,
+      "public" -> boolean
       )(LatinText.apply)(LatinText.unapply)
     )
 
