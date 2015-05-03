@@ -1,4 +1,4 @@
-@(latinText: models.LatinText)
+@(latinText: models.LatinText)(implicit request: play.api.mvc.Request[Any])
 
 @main(latinText.title) {
   <div class="row">
