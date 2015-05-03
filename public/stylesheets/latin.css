@@ -6,6 +6,11 @@
   user-select: none;
 }
 
+span.public {
+	color: green;
+	font-size: 115%;
+}
+
 div.form-control {
   display: block;
   width: 100%;

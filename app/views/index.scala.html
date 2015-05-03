@@ -7,6 +7,7 @@
           <table class="table table-striped">
             <thead>
               <th>Id</th>
+              <th>Public</th>
               <th>Titre</th>
               <th>Action</th>
             </thead>
@@ -14,6 +15,7 @@
               @for(lt <- latinTexts) {
                 <tr>
                   <td>@lt.id</td>
+                  <td>@if(lt.public){<span class="glyphicon glyphicon-eye-open public" aria-hidden="true"></span>}</td>
                   <td>@lt.title</td>
                   <td>
                     <a class="btn btn-primary" href="@routes.Application.show(lt.id.get)">Voir</a>
