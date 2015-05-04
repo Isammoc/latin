@@ -10,14 +10,21 @@ import play.api.mvc.Results._
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
+class UserRequest[A](val authenticated: Boolean, request: Request[A]) extends WrappedRequest[A](request)
+
 object Secured extends Controller {
   lazy val password = Play.current.configuration.getString("application.password").getOrElse("toto")
 
+  trait Authenticated;
+
   val authenticateForm = Form(single("pass" -> nonEmptyText.verifying("Ce n'est pas le bon mot de passe",_ == password)))
 
-  def logout = Action {implicit request =>
+  def unauthorized[A](userRequest: UserRequest[A]) = Unauthorized(views.html.authenticate(authenticateForm)(userRequest))
+
+  def logout = Action { implicit request =>
     Redirect(routes.Application.index).withSession(request.session - "pass")
-    }
+  }
+
   def authenticate = Action { implicit request =>
     authenticateForm.bindFromRequest().fold(
       form => BadRequest(views.html.authenticate(form)),
@@ -27,9 +34,15 @@ object Secured extends Controller {
   object LoggingAction extends ActionBuilder[Request] {
     def invokeBlock[A](request: Request[A], block: (Request[A]) => Future[Result]) = {
       request.session.get("pass").flatMap(pass => if (pass == password) Some(pass) else None) match {
-        case None => Future.successful(Ok(views.html.authenticate(authenticateForm)))
-        case _ => block(request)
+        case None => Future.successful(unauthorized(new UserRequest(false, request)))
+        case _ => block(new UserRequest(true, request))
       }
+    }
+  }
+
+  object PublicAction extends ActionBuilder[UserRequest] {
+    def invokeBlock[A](request: Request[A], block: (UserRequest[A]) => Future[Result]) = {
+      block(new UserRequest(request.session.get("pass").flatMap(pass => if (pass == password) Some(pass) else None) != None, request))
     }
   }
 }

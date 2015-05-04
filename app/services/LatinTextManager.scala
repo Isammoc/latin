@@ -13,26 +13,28 @@ object LatinTextManager {
     title <- str("title")
     content <- str("content")
     comment <- str("comment")
-  } yield LatinText(Some(id), title, content, comment)
+    public <- bool("public")
+  } yield LatinText(Some(id), title, content, comment, public)
 
   def save(lt: LatinText) = DB.withConnection {implicit c =>
     lt.id.fold {
-      val id = SQL("""INSERT INTO latin_text (title, content, comment) VALUES ({title}, {content}, {comment})""").on('title -> lt.title, 'content -> lt.content, 'comment -> lt.comment).executeInsert()
+      val id = SQL("""INSERT INTO latin_text (title, content, comment, public) VALUES ({title}, {content}, {comment}, {public})""").on('title -> lt.title, 'content -> lt.content, 'comment -> lt.comment, 'public -> lt.public).executeInsert()
       lt.copy(id = id)
     } { id =>
       SQL("""UPDATE latin_text
          | SET title = {title},
          | content = {content},
-         | comment = {comment}
+         | comment = {comment},
+         | public = {public}
          | WHERE id = {id}
-         |""".stripMargin).on('id -> id, 'title -> lt.title, 'content -> lt.content, 'comment -> lt.comment).executeUpdate()
+         |""".stripMargin).on('id -> id, 'title -> lt.title, 'content -> lt.content, 'comment -> lt.comment, 'public -> lt.public).executeUpdate()
       lt
     }
   }
 
   def load(id: Long) = DB.withConnection { implicit c =>
     SQL("""
-      | SELECT id, title, content, comment
+      | SELECT id, title, content, comment, public
       |   FROM latin_text
       |   WHERE id = {id}
       |""".stripMargin).on('id -> id).executeQuery().as(parser.single)
@@ -40,8 +42,18 @@ object LatinTextManager {
 
   def fetchAll = DB.withConnection { implicit c =>
     SQL("""
-      | SELECT id, title, content, comment
+      | SELECT id, title, content, comment, public
       |   FROM latin_text
+      |   ORDER BY id DESC
+      |""".stripMargin).executeQuery().as(parser.*)
+  }
+
+  def fetchPublic = DB.withConnection { implicit c =>
+    SQL("""
+      | SELECT id, title, content, comment, public
+      |   FROM latin_text
+      |   WHERE public IS TRUE
+      |   ORDER BY id DESC
       |""".stripMargin).executeQuery().as(parser.*)
   }
 

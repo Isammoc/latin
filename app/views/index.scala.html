@@ -1,4 +1,4 @@
-@(latinTexts: Seq[models.LatinText])
+@(latinTexts: Seq[models.LatinText])(implicit request: play.api.mvc.Request[Any])
 
 @main("Latin") {
        <div class="row">
@@ -7,6 +7,7 @@
           <table class="table table-striped">
             <thead>
               <th>Id</th>
+              <th>Public</th>
               <th>Titre</th>
               <th>Action</th>
             </thead>
@@ -14,16 +15,27 @@
               @for(lt <- latinTexts) {
                 <tr>
                   <td>@lt.id</td>
+                  <td>@if(lt.public){<span class="glyphicon glyphicon-eye-open public" aria-hidden="true"></span>}</td>
                   <td>@lt.title</td>
                   <td>
                     <a class="btn btn-primary" href="@routes.Application.show(lt.id.get)">Voir</a>
-                    <a class="btn btn-warning" href="@routes.Application.edit(lt.id.get)">Éditer</a>
+                    @request match {
+                      case userRequest:controllers.UserRequest[_] if userRequest.authenticated => {
+                        <a class="btn btn-warning" href="@{routes.Application.edit(lt.id.get)}">Éditer</a>
+                      }
+                      case _ => {}
+                    }
                   </td>
                 </tr>
               }
             </tbody>
           </table>
-          <a href="@routes.Application.create">Créer un document</a>
+          @request match {
+            case userRequest:controllers.UserRequest[_] if userRequest.authenticated => {
+              <a href="@routes.Application.create">Créer un document</a>
+            }
+            case _ => {}
+          }
         </div>
       </div>
 } {
