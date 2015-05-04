@@ -19,6 +19,8 @@ object Secured extends Controller {
 
   val authenticateForm = Form(single("pass" -> nonEmptyText.verifying("Ce n'est pas le bon mot de passe",_ == password)))
 
+  def unauthorized[A](userRequest: UserRequest[A]) = Unauthorized(views.html.authenticate(authenticateForm)(userRequest))
+
   def logout = Action { implicit request =>
     Redirect(routes.Application.index).withSession(request.session - "pass")
   }
@@ -32,9 +34,15 @@ object Secured extends Controller {
   object LoggingAction extends ActionBuilder[Request] {
     def invokeBlock[A](request: Request[A], block: (Request[A]) => Future[Result]) = {
       request.session.get("pass").flatMap(pass => if (pass == password) Some(pass) else None) match {
-        case None => Future.successful(Ok(views.html.authenticate(authenticateForm)(new UserRequest(false, request))))
+        case None => Future.successful(unauthorized(new UserRequest(false, request)))
         case _ => block(new UserRequest(true, request))
       }
+    }
+  }
+
+  object PublicAction extends ActionBuilder[UserRequest] {
+    def invokeBlock[A](request: Request[A], block: (UserRequest[A]) => Future[Result]) = {
+      block(new UserRequest(request.session.get("pass").flatMap(pass => if (pass == password) Some(pass) else None) != None, request))
     }
   }
 }

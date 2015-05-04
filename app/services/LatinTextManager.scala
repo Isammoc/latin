@@ -48,6 +48,15 @@ object LatinTextManager {
       |""".stripMargin).executeQuery().as(parser.*)
   }
 
+  def fetchPublic = DB.withConnection { implicit c =>
+    SQL("""
+      | SELECT id, title, content, comment, public
+      |   FROM latin_text
+      |   WHERE public IS TRUE
+      |   ORDER BY id DESC
+      |""".stripMargin).executeQuery().as(parser.*)
+  }
+
   def delete(id: Long) = DB.withConnection {implicit c =>
     SQL("""DELETE FROM latin_text WHERE id = {id}""").on('id -> id).execute()
   }

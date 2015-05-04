@@ -7,6 +7,7 @@ import play.api.mvc._
 import models.LatinText
 import services.LatinTextManager
 import Secured.LoggingAction
+import Secured.PublicAction
 
 object Application extends Controller {
   val latinTextForm = Form(mapping(
@@ -18,13 +19,18 @@ object Application extends Controller {
       )(LatinText.apply)(LatinText.unapply)
     )
 
-  def index = LoggingAction { implicit request =>
-    val latinTexts = LatinTextManager.fetchAll
+  def index = PublicAction { implicit request =>
+    val latinTexts = if(request.authenticated) LatinTextManager.fetchAll else LatinTextManager.fetchPublic
     Ok(views.html.index(latinTexts))
   }
 
-  def show(id: Long) = LoggingAction { implicit request =>
-    Ok(views.html.show(LatinTextManager.load(id)))
+  def show(id: Long) = PublicAction { implicit request =>
+    val lt = LatinTextManager.load(id)
+    if(lt.public || request.authenticated) {
+      Ok(views.html.show(LatinTextManager.load(id)))
+    } else {
+      Secured.unauthorized(request)
+    }
   }
 
   def edit(id: Long) = LoggingAction { implicit request =>
