@@ -9,7 +9,7 @@ import services.LatinTextManager
 import Secured.LoggingAction
 import Secured.PublicAction
 
-object Application extends Controller {
+class Application extends Controller {
   val latinTextForm = Form(mapping(
       "id" -> optional(longNumber),
       "title" -> nonEmptyText,

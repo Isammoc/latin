@@ -15,3 +15,5 @@ libraryDependencies ++= Seq(
 
 libraryDependencies += "com.typesafe.play" %% "anorm" % "2.4.0"
 libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1203-jdbc42"
+
+routesGenerator := InjectedRoutesGenerator
