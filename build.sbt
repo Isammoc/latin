@@ -4,12 +4,16 @@ version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.11.1"
+scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq(
   jdbc,
-  anorm,
   cache,
   ws,
-  "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
+  evolutions
 )
+
+libraryDependencies += "com.typesafe.play" %% "anorm" % "2.4.0"
+libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1203-jdbc42"
+
+routesGenerator := InjectedRoutesGenerator
