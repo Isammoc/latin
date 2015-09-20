@@ -2,13 +2,13 @@ package services
 
 import anorm._
 import anorm.SqlParser._
-import play.api.db.DB
+import play.api.db.Database
 import play.api.Play.current
 
 import models.LatinText
 
 @javax.inject.Singleton
-class LatinTextManager {
+class LatinTextManager @javax.inject.Inject() (val db: play.api.db.Database){
   val parser = for {
     id <- long("id")
     title <- str("title")
@@ -17,7 +17,7 @@ class LatinTextManager {
     public <- bool("public")
   } yield LatinText(Some(id), title, content, comment, public)
 
-  def save(lt: LatinText) = DB.withConnection {implicit c =>
+  def save(lt: LatinText) = db.withConnection { implicit c =>
     lt.id.fold {
       val id = SQL("""INSERT INTO latin_text (title, content, comment, public) VALUES ({title}, {content}, {comment}, {public})""").on('title -> lt.title, 'content -> lt.content, 'comment -> lt.comment, 'public -> lt.public).executeInsert()
       lt.copy(id = id)
@@ -33,7 +33,7 @@ class LatinTextManager {
     }
   }
 
-  def load(id: Long) = DB.withConnection { implicit c =>
+  def load(id: Long) = db.withConnection { implicit c =>
     SQL("""
       | SELECT id, title, content, comment, public
       |   FROM latin_text
@@ -41,7 +41,7 @@ class LatinTextManager {
       |""".stripMargin).on('id -> id).executeQuery().as(parser.single)
   }
 
-  def fetchAll = DB.withConnection { implicit c =>
+  def fetchAll = db.withConnection { implicit c =>
     SQL("""
       | SELECT id, title, content, comment, public
       |   FROM latin_text
@@ -49,7 +49,7 @@ class LatinTextManager {
       |""".stripMargin).executeQuery().as(parser.*)
   }
 
-  def fetchPublic = DB.withConnection { implicit c =>
+  def fetchPublic = db.withConnection { implicit c =>
     SQL("""
       | SELECT id, title, content, comment, public
       |   FROM latin_text
@@ -58,7 +58,7 @@ class LatinTextManager {
       |""".stripMargin).executeQuery().as(parser.*)
   }
 
-  def delete(id: Long) = DB.withConnection {implicit c =>
+  def delete(id: Long) = db.withConnection { implicit c =>
     SQL("""DELETE FROM latin_text WHERE id = {id}""").on('id -> id).execute()
   }
 
