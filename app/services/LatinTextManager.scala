@@ -7,7 +7,8 @@ import play.api.Play.current
 
 import models.LatinText
 
-object LatinTextManager {
+@javax.inject.Singleton
+class LatinTextManager {
   val parser = for {
     id <- long("id")
     title <- str("title")
