@@ -5,11 +5,10 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.mvc._
 import models.LatinText
-import services.LatinTextManager
 import Secured.LoggingAction
 import Secured.PublicAction
 
-class Application extends Controller {
+class Application @javax.inject.Inject() (val latinTextManager : services.LatinTextManager) extends Controller {
   val latinTextForm = Form(mapping(
       "id" -> optional(longNumber),
       "title" -> nonEmptyText,
@@ -20,21 +19,21 @@ class Application extends Controller {
     )
 
   def index = PublicAction { implicit request =>
-    val latinTexts = if(request.authenticated) LatinTextManager.fetchAll else LatinTextManager.fetchPublic
+    val latinTexts = if(request.authenticated) latinTextManager.fetchAll else latinTextManager.fetchPublic
     Ok(views.html.index(latinTexts))
   }
 
   def show(id: Long) = PublicAction { implicit request =>
-    val lt = LatinTextManager.load(id)
+    val lt = latinTextManager.load(id)
     if(lt.public || request.authenticated) {
-      Ok(views.html.show(LatinTextManager.load(id)))
+      Ok(views.html.show(latinTextManager.load(id)))
     } else {
       Secured.unauthorized(request)
     }
   }
 
   def edit(id: Long) = LoggingAction { implicit request =>
-    Ok(views.html.edit(latinTextForm.fill(LatinTextManager.load(id))))
+    Ok(views.html.edit(latinTextForm.fill(latinTextManager.load(id))))
   }
 
   def create = LoggingAction { implicit request =>
@@ -50,12 +49,12 @@ consectatur<span data-type="inv">que</span></span> <span data-type="acc f sg">nu
     form.fold(
         formWithErrors => BadRequest(views.html.edit(formWithErrors)),
         {latinText =>
-          val lt = LatinTextManager.save(latinText)
+          val lt = latinTextManager.save(latinText)
           Redirect(routes.Application.show(lt.id.get))})
   }
 
   def delete(id: Long) = LoggingAction { implicit request =>
-    LatinTextManager.delete(id)
+    latinTextManager.delete(id)
     Redirect(routes.Application.index())
   }
 
