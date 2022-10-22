@@ -2,15 +2,16 @@ name := """latin"""
 
 version := "2.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+enablePlugins(PlayScala)
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.12.16"
 
 libraryDependencies ++= Seq(
+  guice,
   jdbc,
   evolutions,
-  "com.typesafe.play" %% "anorm" % "2.4.0",
-  "org.postgresql" % "postgresql" % "9.4-1203-jdbc42"
+  "com.typesafe.play" %% "anorm" % "2.5.3",
+  "org.xerial" % "sqlite-jdbc" % "3.39.3.0",
 )
 
 routesGenerator := InjectedRoutesGenerator

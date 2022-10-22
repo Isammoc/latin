@@ -1,13 +1,12 @@
-# --- !Ups
+-- !Ups
  
 CREATE TABLE latin_text (
-    id SERIAL,
+    id INTEGER PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
-    comment TEXT,
-    PRIMARY KEY (id)
+    comment TEXT
 );
  
-# --- !Downs
+-- !Downs
  
 DROP TABLE latin_text;

@@ -1,7 +1,7 @@
-# --- !Ups
+-- !Ups
 
-ALTER TABLE latin_text ADD COLUMN public BOOLEAN DEFAULT FALSE;
+ALTER TABLE latin_text ADD COLUMN `public` BOOLEAN DEFAULT FALSE;
+
+-- !Downs
  
-# --- !Downs
- 
-ALTER TABLE latin_text DROP COLUMN IF EXISTS public; 
+ALTER TABLE latin_text DROP COLUMN `public`;
