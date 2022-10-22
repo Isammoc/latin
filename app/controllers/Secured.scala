@@ -1,8 +1,6 @@
 package controllers
 
 import actions.LoggedAction
-import play.api.data.Form
-import play.api.data.Forms._
 import play.api.mvc._
 import play.api._
 
@@ -18,7 +16,6 @@ class Secured @Inject() (cc: ControllerComponents, configuration: Configuration)
   def authenticate: Action[AnyContent] = Action { implicit request =>
     LoggedAction.authenticateForm(configuration).bindFromRequest().fold(
       form => BadRequest(views.html.authenticate(form)),
-      _ => Redirect(routes.Application.index)).withSession("pass" -> LoggedAction.password(configuration))
+      pass => Redirect(routes.Application.index).withSession("pass" -> pass))
   }
-
 }
